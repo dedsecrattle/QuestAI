@@ -3,7 +3,6 @@ import HomePage from "./pages/HomePage.jsx";
 import Summary from "./pages/Summary.jsx";
 import GenMaterial from "./pages/GenMaterial.jsx";
 import {
-    BrowserRouter as Router,
     Routes,
     Route,
 } from "react-router-dom";

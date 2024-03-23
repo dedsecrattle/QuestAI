@@ -66,13 +66,13 @@ function HomePage (){
                 <Stack direction={"row"} justifyContent={"center"} spacing={10}> 
                 <Box
                     mr={2}
-                    width="35%" 
-                    height="350px" 
+                    width="500px"
+                    height="350px"
                     border="1px solid grey" 
                     borderRadius="10px"
                     padding="20px"
                 >
-                    <Stack direction={"column"} justifyContent={"center"} spacing={10}>
+                    <Stack direction={"column"} justifyContent={"center"} spacing={30}>
                         <Text as={"b"} fontSize={'2xl'}>PDF Summarization </Text>
                         <Input
                         type="file"
@@ -116,6 +116,6 @@ function HomePage (){
         </Box>
         </Box>
     );
-};
+}
 
 export default HomePage;

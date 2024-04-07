@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import {Box, Flex, Input, Button, Text, Stack} from '@chakra-ui/react';
-import {generateMaterial} from "../backend/generate.js";
+import {generateMaterial, generateQuiz} from "../backend/generate.js";
 import { Spinner } from '@chakra-ui/react';
 
 function HomePage (){
@@ -23,7 +23,8 @@ function HomePage (){
 
         try {
             const data = await  generateMaterial(topic, subTopic);
-            nagivate('/GenMaterial', { state: { data } });
+            const quiz = await generateQuiz(topic,subTopic);
+            nagivate('/GenMaterial', { state: { data , quiz} });
         } catch (error) {
             console.error('Error:', error);
         } finally {

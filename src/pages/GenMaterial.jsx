@@ -13,7 +13,7 @@ function GenMaterial() {
   };
 
   const generateQuiz = () => {
-    const quiz = `Quiz to test on your understanding`;
+    const quiz = location.state?.quiz;
     setGeneratedQuiz(quiz)
   }
 
@@ -44,7 +44,7 @@ function GenMaterial() {
         }
     </Text>
     <Button onClick={generateQuiz} size='lg'>Quiz</Button>
-    <Text>{generatedQuiz}</Text>
+    <ReactMarkdown>{generatedQuiz}</ReactMarkdown>
     <Button onClick={navigateToHome} size='lg'>Back to Home Page</Button>
     </Stack>
   );

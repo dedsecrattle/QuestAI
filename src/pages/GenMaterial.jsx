@@ -24,7 +24,10 @@ function GenMaterial() {
     <Stack direction={"column"} justifyContent={"center"} spacing={10}>
     <Text as={"b"} fontSize={'3xl'}> Learning Materials</Text>
     <Text>
-        {data}
+        {data
+            ? (data)
+            : ("Error Occurred while Generating Data!")
+        }
     </Text>
     <Button onClick={generateQuiz} size='lg'>Quiz</Button>
     <Text>{generatedQuiz}</Text>

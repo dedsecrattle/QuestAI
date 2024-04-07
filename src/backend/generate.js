@@ -20,3 +20,4 @@ export function generateMaterial(topic, subtopic) {
             console.error('Error:', error);
         });
 }
+

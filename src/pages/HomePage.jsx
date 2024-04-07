@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import {Box, Flex, Input, Button, Text, Stack} from '@chakra-ui/react';
+import {generateMaterial} from "../backend/generate.js";
 
 function HomePage (){
     const [topic, setTopic] = useState('');
@@ -14,9 +15,16 @@ function HomePage (){
       nagivate("/pdfSummary");
     };
 
-    const navigateToGenMaterial = () => {
-        nagivate("/GenMaterial");
-      };
+    const handleGenerate = async (e) => {
+        e.preventDefault();
+
+        try {
+            const data = await  generateMaterial(topic, subTopic);
+            nagivate('/GenMaterial', { state: { data } });
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
 
     const handleTopicChange = (e) => {
         setTopic(e.target.value);
@@ -105,7 +113,7 @@ function HomePage (){
                             onChange={handleSubTopicChange}
                             mr={2}
                         />
-                        <Button onClick={navigateToGenMaterial} size='lg'>Generate</Button>
+                        <Button onClick={handleGenerate} size='lg'>Generate</Button>
                     </Stack>
                 </Box>
                 </Stack>

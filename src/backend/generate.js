@@ -3,7 +3,6 @@ export function generateMaterial(topic, subtopic) {
         topic,
         subtopic
     };
-
     return fetch("https://questai-backend.onrender.com/generate", {
         method: 'POST',
         headers: {
@@ -26,7 +25,6 @@ export function generateQuiz(topic, subtopic) {
         topic,
         subtopic
     };
-
     return fetch("https://questai-backend.onrender.com/quiz", {
         method: 'POST',
         headers: {
@@ -48,7 +46,6 @@ export function generateSummary(extracted_text) {
     const requestBody = {
         extracted_text
     };
-
     return fetch("https://questai-backend.onrender.com/summary", {
         method: 'POST',
         headers: {

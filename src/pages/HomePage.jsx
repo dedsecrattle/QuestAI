@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {Box, Flex, Input, Button, Text, Stack} from '@chakra-ui/react';
 import {generateMaterial, generateQuiz, generateSummary} from "../backend/generate.js";
 import { Spinner } from '@chakra-ui/react';
-import pdfToText from 'react-pdftotext'
+import pdfToText from "react-pdftotext";
 
 function HomePage (){
     const [topic, setTopic] = useState('');
@@ -11,7 +11,7 @@ function HomePage (){
     // const [generatedInfo, setGeneratedInfo] = useState('');
     // const [generatedSummary, setGeneratedSummary] = useState('');
     const [extractedText, setExtractedText] = useState('');
-    const [file, setFile] = useState('')
+    const [file, setFile] = useState(null)
     const nagivate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
 
@@ -34,6 +34,14 @@ function HomePage (){
         }
     };
 
+    function extractText(event) {
+        const file = event.target.files[0]
+        setFile(file)
+        pdfToText(file)
+            .then(text => setExtractedText(text))
+            .catch(error => console.error("Failed to extract text from pdf"))
+    }
+
     const handleTopicChange = (e) => {
         setTopic(e.target.value);
     };
@@ -42,25 +50,24 @@ function HomePage (){
         setSubTopic(e.target.value);
     };
 
+
     const handlePdfSummarizationClick = async (e) => {
         e.preventDefault()
         const formData = new FormData()
         formData.append("file", file)
         console.log(file)
         alert(`File uploaded Successfully: ${file.name}`)
-        pdfToText(file)
-        .then(text => setExtractedText(text))
-        .catch(error => console.error("Failed to extract text from pdf"))
+        console.log(extractedText)
         setIsLoading(true)
-
+        let text = ""
         try {
-            const text = await  generateSummary(extractedText);
-            nagivate("/pdfSummary", { state: {text} });
+            text = await generateSummary(extractedText);
         } catch (error) {
             console.error('Error:', error);
         } finally {
             setIsLoading(false);
         }
+        nagivate("/pdfSummary", { state: {text} });
     }
     return (
         <Box
@@ -96,7 +103,7 @@ function HomePage (){
                         type="file"
                         accept="application/pdf"
                         required
-                        onChange={(e) => setFile(e.target.files[0])} //accept only the first file
+                        onChange={extractText}
                         />
                         <Button onClick={handlePdfSummarizationClick} size='lg'>Submit PDF</Button>
                     </Stack>

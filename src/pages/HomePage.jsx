@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {Box, Flex, Input, Button, Text, Stack} from '@chakra-ui/react';
 import {generateMaterial, generateQuiz} from "../backend/generate.js";
 import { Spinner } from '@chakra-ui/react';
+import pdfToText from 'react-pdftotext'
 
 function HomePage (){
     const [topic, setTopic] = useState('');
@@ -46,6 +47,9 @@ function HomePage (){
         formData.append("file", file)
         console.log(file)
         alert(`File uploaded Successfully: ${file.name}`)
+        pdfToText(file)
+        .then(text => console.log(text))
+        .catch(error => console.error("Failed to extract text from pdf"))
         navigateToSummary()
     }
     return (
@@ -115,8 +119,8 @@ function HomePage (){
                 </Stack>
                 </Stack>
             </Flex>
-            {/* <Text>{generatedInfo}</Text>
-            <Text>{generatedSummary}</Text> */}
+            {/* <Text>{extractedText}</Text> */}
+            {/* <Text>{generatedSummary}</Text> */}
         </Box>
                 )}
         </Box>

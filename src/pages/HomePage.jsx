@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import {Box, Flex, Input, Button, Text, Stack} from '@chakra-ui/react';
-import {generateMaterial, generateQuiz} from "../backend/generate.js";
+import {generateMaterial, generateQuiz, generateSummary} from "../backend/generate.js";
 import { Spinner } from '@chakra-ui/react';
 import pdfToText from 'react-pdftotext'
 
@@ -10,6 +10,7 @@ function HomePage (){
     const [subTopic, setSubTopic] = useState('');
     // const [generatedInfo, setGeneratedInfo] = useState('');
     // const [generatedSummary, setGeneratedSummary] = useState('');
+    const [extractedText, setExtractedText] = useState('');
     const [file, setFile] = useState('')
     const nagivate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
@@ -48,9 +49,18 @@ function HomePage (){
         console.log(file)
         alert(`File uploaded Successfully: ${file.name}`)
         pdfToText(file)
-        .then(text => console.log(text))
+        .then(text => setExtractedText(text))
         .catch(error => console.error("Failed to extract text from pdf"))
-        navigateToSummary()
+        setIsLoading(true)
+
+        try {
+            const text = await  generateSummary(extractedText);
+            nagivate("/pdfSummary", { state: {text} });
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            setIsLoading(false);
+        }
     }
     return (
         <Box

@@ -1,17 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
-import {Button, Text, Stack} from '@chakra-ui/react';
-import ReactMarkdown from 'react-markdown'
+import {Button, Text, Stack, Box} from '@chakra-ui/react';
+import Markdown from 'react-markdown'
 
 function GenMaterial() {
   const nagivate = useNavigate();
-  const [generatedQuiz, setGeneratedQuiz] = useState('');
+  const [generatedQuiz, setGeneratedQuiz] = useState(null);
 
   const navigateToHome = () => {
     nagivate("/");
   };
-
   const generateQuiz = () => {
     const quiz = location.state?.quiz;
     setGeneratedQuiz(quiz)
@@ -19,32 +18,23 @@ function GenMaterial() {
 
     const location = useLocation();
     const data = location.state?.data;
-  const AlignedHeading = ({ node, ...props }) => (
-      <h2 style={{ textAlign: 'center' }} {...props} />
-  );
-
-  const Table = ({ node, ...props }) => (
-      <li style={{ textAlign: 'left' }} {...props} />
-  );
-  const AlignedParagraph = ({ node, ...props }) => (
-      <p style={{ textAlign: 'left' }} {...props} />
-  );
 
   return (
     <Stack direction={"column"} justifyContent={"center"} spacing={10}>
     <Text as={"b"} fontSize={'3xl'}> Learning Materials</Text>
-    <Text>
+    <Box textAlign={"left"}>
         {data
-            ? <ReactMarkdown  components={{
-              h2: AlignedHeading,
-              p: AlignedParagraph,
-              li : Table
-            }}>{data}</ReactMarkdown>
+            ? <Markdown>{data}</Markdown>
             : ("Error Occurred while Generating Data!")
         }
-    </Text>
+    </Box>
     <Button onClick={generateQuiz} size='lg'>Quiz</Button>
-    <ReactMarkdown>{generatedQuiz}</ReactMarkdown>
+      {
+        generatedQuiz
+            ? (
+                <Box textAlign={"left"}><Markdown>{generatedQuiz}</Markdown></Box>)
+            : <Text> Click on the Quiz Button to See the Quiz</Text>
+      }
     <Button onClick={navigateToHome} size='lg'>Back to Home Page</Button>
     </Stack>
   );

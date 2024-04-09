@@ -112,7 +112,7 @@ function HomePage (){
                 <Box
                     mr={2}
                     width={{ base: "100%", md: "500px" }}
-                    height="450px"
+                    height={{ base: "auto", md: "450px" }}
                     border="1px solid grey" 
                     borderRadius="10px"
                     padding="20px"

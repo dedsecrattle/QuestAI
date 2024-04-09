@@ -151,7 +151,7 @@ function HomePage (){
                             mr={2}
                         />
                         <Menu>
-                            <MenuButton as={Button} colorScheme="blue" width="full">
+                            <MenuButton as={Button} bg="gray.300" color="black" width="full">
                                 {level}
                             </MenuButton>
                             <MenuList rootProps={{ width: "34%" }}>

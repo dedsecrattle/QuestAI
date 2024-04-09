@@ -1,7 +1,8 @@
-export function generateMaterial(topic, subtopic) {
+export function generateMaterial(topic, subtopic, level) {
     const requestBody = {
         topic,
-        subtopic
+        subtopic,
+        level
     };
     return fetch("https://questai-backend.onrender.com/generate", {
         method: 'POST',
@@ -20,10 +21,11 @@ export function generateMaterial(topic, subtopic) {
         });
 }
 
-export function generateQuiz(topic, subtopic) {
+export function generateQuiz(topic, subtopic, level) {
     const requestBody = {
         topic,
-        subtopic
+        subtopic,
+        level
     };
     return fetch("https://questai-backend.onrender.com/quiz", {
         method: 'POST',

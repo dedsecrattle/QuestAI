@@ -1,6 +1,18 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import {Box, Flex, Input, Button, Text, Stack} from '@chakra-ui/react';
+import {
+    Box,
+    Flex,
+    Input,
+    Button,
+    Text,
+    Stack,
+    MenuButton,
+    Menu,
+    MenuItem,
+    MenuGroup,
+    MenuDivider, MenuList
+} from '@chakra-ui/react';
 import {generateMaterial, generateQuiz, generateSummary} from "../backend/generate.js";
 import { Spinner } from '@chakra-ui/react';
 import pdfToText from "react-pdftotext";
@@ -14,6 +26,7 @@ function HomePage (){
     const [file, setFile] = useState(null)
     const nagivate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
+    const [level, setlevel] = useState('Select the Level of Proficiency');
 
     const navigateToSummary = () => {
       nagivate("/pdfSummary");
@@ -24,8 +37,8 @@ function HomePage (){
         setIsLoading(true);
 
         try {
-            const data = await  generateMaterial(topic, subTopic);
-            const quiz = await generateQuiz(topic,subTopic);
+            const data = await  generateMaterial(topic, subTopic, level);
+            const quiz = await generateQuiz(topic,subTopic, level);
             nagivate('/GenMaterial', { state: { data , quiz} });
         } catch (error) {
             console.error('Error:', error);
@@ -48,6 +61,11 @@ function HomePage (){
 
     const handleSubTopicChange = (e) => {
         setSubTopic(e.target.value);
+    };
+
+
+    const handleSelection = (value) => {
+        setlevel(value);
     };
 
 
@@ -130,6 +148,22 @@ function HomePage (){
                             onChange={handleSubTopicChange}
                             mr={2}
                         />
+                        <Menu>
+                            <MenuButton as={Button} colorScheme="blue">
+                                {level}
+                            </MenuButton>
+                            <MenuList>
+                                <MenuItem value="HighSchool" onClick={() => handleSelection('Highschool')}>
+                                    HighSchool
+                                </MenuItem>
+                                <MenuItem value="Undergraduate" onClick={() => handleSelection('Undergraduate')}>
+                                    Undergraduate
+                                </MenuItem>
+                                <MenuItem value="Graduate" onClick={() => handleSelection('Graduate')}>
+                                    Graduate
+                                </MenuItem>
+                            </MenuList>
+                        </Menu>
                         <Button onClick={handleGenerate} size='lg'>Generate</Button>
                     </Stack>
                 </Box>

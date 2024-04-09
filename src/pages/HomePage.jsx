@@ -90,10 +90,12 @@ function HomePage (){
     return (
         <Box
             display="flex"
+            flexDirection={{ base: "column", md: "row" }}
             justifyContent="center"
             alignItems="center"
-            height="100vh"
+            minHeight="100vh"
             p={4}
+            overflow="auto"
         >
             {isLoading ? (
                 <>
@@ -101,16 +103,16 @@ function HomePage (){
                 <Text as={"b"} fontSize={'3xl'} padding={10}> Hold ON! While we generate the Information for you!</Text>
                 </>
             ) : (
-        <Box p={4}
+        <Box p={4} 
         >
             <Flex mb={4}>
                 <Stack direction={"column"} justifyContent={"center"} spacing={10}>
                     <Text as={"b"} fontSize={'3xl'}> QuestAI - Your Buddy in Learning New topics using AI</Text>
-                <Stack direction={"row"} justifyContent={"center"} spacing={10}> 
+                <Stack direction={{ base: "column", md: "row" }} justifyContent={"center"} spacing={10}> 
                 <Box
                     mr={2}
-                    width="500px"
-                    height="350px"
+                    width={{ base: "100%", md: "500px" }}
+                    height={{ base: "auto", md: "450px" }}
                     border="1px solid grey" 
                     borderRadius="10px"
                     padding="20px"
@@ -128,8 +130,8 @@ function HomePage (){
                 </Box>
                 <Box
                     mr={2}
-                    width="65%" 
-                    height="350px" 
+                    width={["100%", "75%", "65%"]}
+                    height="450px" 
                     border="1px solid grey" 
                     borderRadius="10px"
                     padding="20px"
@@ -149,10 +151,10 @@ function HomePage (){
                             mr={2}
                         />
                         <Menu>
-                            <MenuButton as={Button} colorScheme="blue">
+                            <MenuButton as={Button} bg="gray.300" color="black" width="full">
                                 {level}
                             </MenuButton>
-                            <MenuList>
+                            <MenuList rootProps={{ width: "34%" }}>
                                 <MenuItem value="HighSchool" onClick={() => handleSelection('Highschool')}>
                                     HighSchool
                                 </MenuItem>

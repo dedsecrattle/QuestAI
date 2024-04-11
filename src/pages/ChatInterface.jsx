@@ -25,12 +25,17 @@ function ChatInterface ({context}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (newMessage.trim() !== '') {
+      const userMessage = { id: Date.now(), text: newMessage, sender: 'user' };
+      setMessages((currentMessages) => [...currentMessages, userMessage]);
+      setNewMessage('');
+
       try {
         // Send the new message to the API
         const response = await getResponse(context, newMessage)
         console.log(response)
-        setMessages([...messages, response]);
-        setNewMessage('');
+        const responseObject = { id: Date.now(), text: response, sender: 'system' }; 
+        setMessages((currentMessages) => [...currentMessages, responseObject]);
+        // setNewMessage('');
       } catch (error) {
         console.error('Error sending message:', error);
       }
@@ -41,23 +46,29 @@ function ChatInterface ({context}) {
     <Flex
       direction="column"
       h="100vh"
-      w="100vw"
+      // w="100vw"
       bg="gray.100"
       p={6}
       boxSizing="border-box"
     >
       <Box flexGrow={1} overflowY="auto">
-        {messages.map((message, index) => (
-          <Box
-            key={index}
-            bg="white"
-            p={4}
-            borderRadius="md"
-            shadow="md"
-            mb={4}
+        {messages.map((message) => (
+          <Flex
+          key={message.id}
+          justify={message.sender === 'user' ? 'flex-end' : 'flex-start'}
+          mb={4}
           >
-            <Text>{message.text}</Text>
-          </Box>
+            <Box
+              bg={message.sender === 'user' ? 'blue.400' : 'white'}
+              color={message.sender === 'user' ? 'white' : 'black'}
+              p={4}
+              borderRadius="md"
+              shadow="md"
+              maxWidth="70%"
+            >
+              <Text textAlign={message.sender === 'user' ? 'right' : 'left'}>{message.text}</Text>
+            </Box>
+          </Flex>
         ))}
       </Box>
       <form onSubmit={handleSubmit}>

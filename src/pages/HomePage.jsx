@@ -85,7 +85,7 @@ function HomePage (){
         } finally {
             setIsLoading(false);
         }
-        nagivate("/pdfSummary", { state: {text} });
+        nagivate("/pdfSummary", { state: {text, extractedText}});
     }
     return (
         <Box

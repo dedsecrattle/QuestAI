@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
-import {Button, Text, Stack, Box} from '@chakra-ui/react';
+import {Button, Text, Stack, Box, Flex} from '@chakra-ui/react';
 import Markdown from "react-markdown";
+import ChatInterface from "./ChatInterface";
 
 function Summary() {
   const nagivate = useNavigate();
   const [generatedQuiz, setGeneratedQuiz] = useState('');
   const location = useLocation();
   const text = location.state?.text;
+  const extractedText = location.state?.extractedText
 
   const navigateToHome = () => {
     nagivate("/");
@@ -27,6 +29,9 @@ function Summary() {
       </Box>
     <Button onClick={generateQuiz} size='lg'>Quiz</Button>
     <Text>{generatedQuiz}</Text>
+    <Flex direction="column" flexGrow={1}>
+        <ChatInterface context={extractedText}/>
+      </Flex>
     <Button onClick={navigateToHome} size='lg'>Back to Home Page</Button>
     </Stack>
   );

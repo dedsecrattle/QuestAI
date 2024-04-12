@@ -27,8 +27,7 @@ function Summary() {
       <Box textAlign={"left"}>
       <Markdown>{text}</Markdown>
       </Box>
-    <Button onClick={generateQuiz} size='lg'>Quiz</Button>
-    <Text>{generatedQuiz}</Text>
+      <Text as={"b"} fontSize={'3xl'}>Ask Questions regarding the PDF</Text>
     <Flex direction="column" flexGrow={1}>
         <ChatInterface context={extractedText}/>
       </Flex>

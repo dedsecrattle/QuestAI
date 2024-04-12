@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Flex, Input, Button, Text,Spinner } from '@chakra-ui/react';
 import { getResponse } from '../backend/generate';
+import Markdown from 'react-markdown';
 
 function ChatInterface({ context }) {
   const [messages, setMessages] = useState([
@@ -34,8 +35,9 @@ function ChatInterface({ context }) {
       <Box flexGrow={1} overflowY="auto">
         {messages.map((message) => (
           <Flex key={message.id} justify={message.sender === 'user' ? 'flex-end' : 'flex-start'} mb={4}>
-            <Box bg={message.sender === 'user' ? 'blue.400' : 'white'} color={message.sender === 'user' ? 'white' : 'black'} p={4} borderRadius="md" shadow="md" maxWidth="70%">
-              <Text textAlign={message.sender === 'user' ? 'right' : 'left'}>{message.text}</Text>
+            <Box bg={message.sender === 'user' ? 'blue.400' : 'white'} color={message.sender === 'user' ? 'white' : 'black'} p={4} borderRadius="md" shadow="md" maxWidth="70%"
+             textAlign={message.sender === 'user' ? 'right' : 'left'}>
+              <Markdown>{message.text}</Markdown>
             </Box>
           </Flex>
         ))}

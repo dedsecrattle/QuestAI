@@ -20,8 +20,6 @@ import pdfToText from "react-pdftotext";
 function HomePage (){
     const [topic, setTopic] = useState('');
     const [subTopic, setSubTopic] = useState('');
-    // const [generatedInfo, setGeneratedInfo] = useState('');
-    // const [generatedSummary, setGeneratedSummary] = useState('');
     const [extractedText, setExtractedText] = useState('');
     const [file, setFile] = useState(null)
     const nagivate = useNavigate();

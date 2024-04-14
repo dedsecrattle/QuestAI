@@ -133,7 +133,7 @@ function HomePage (){
         >
             {isLoading ? (
                 <>
-                <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" gap={8}>
+                <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" gap={10}>
                     <Box>
                         <Spinner size="xl" />
                         <Text as="b" fontSize="3xl" p={10}>

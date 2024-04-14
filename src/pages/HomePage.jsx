@@ -25,13 +25,17 @@ function HomePage (){
     const nagivate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
     const [level, setlevel] = useState('Select the Level of Proficiency');
-
+    const isGenerateButtonDisabled = level === 'Select the Level of Proficiency';
     const navigateToSummary = () => {
       nagivate("/pdfSummary");
     };
 
     const handleGenerate = async (e) => {
         e.preventDefault();
+        if (isGenerateButtonDisabled) {
+            alert('Please select a level of proficiency.');
+            return;
+        } 
         setIsLoading(true);
 
         try {
@@ -164,7 +168,7 @@ function HomePage (){
                                 </MenuItem>
                             </MenuList>
                         </Menu>
-                        <Button onClick={handleGenerate} size='lg'>Generate</Button>
+                        <Button onClick={handleGenerate} size='lg' isDisabled={isGenerateButtonDisabled}>Generate</Button>
                     </Stack>
                 </Box>
                 </Stack>

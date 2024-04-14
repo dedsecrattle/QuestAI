@@ -26,6 +26,34 @@ function HomePage (){
     const [isLoading, setIsLoading] = useState(false);
     const [level, setlevel] = useState('Select the Level of Proficiency');
 
+    const facts = [
+        "The Earth is the only planet in our solar system with liquid water on its surface.",
+        "The Mariana Trench is the deepest part of the world's oceans, reaching a maximum depth of approximately 10,994 meters (36,070 feet).",
+        "The Great Barrier Reef in Australia is the world's largest coral reef system, stretching over 2,300 kilometers (1,430 miles).",
+        "The Sahara Desert in North Africa is the largest hot desert in the world, covering an area of about 3.6 million square miles.",
+        "Mount Everest, located on the border of Nepal and Tibet, is the highest mountain in the world, with a peak elevation of 29,032 feet (8,849 meters).",
+        "The Amazon rainforest in South America is the largest tropical rainforest in the world, covering an area of about 2.1 million square miles.",
+        "The Nile River is the longest river in the world, extending approximately 6,650 kilometers (4,130 miles) from its source in Burundi to the Mediterranean Sea.",
+        "The Pacific Ocean is the largest ocean in the world, covering an area of approximately 63 million square miles.",
+        "The Mona Lisa, painted by Leonardo da Vinci, is considered one of the most famous works of art in the world.",
+        "The Great Wall of China is the longest man-made structure in the world, stretching approximately 13,171 miles (21,196 kilometers) across multiple provinces in China.",
+        "The Eiffel Tower in Paris, France is one of the most iconic landmarks in the world, standing at a height of 1,063 feet (324 meters).",
+        "The Statue of Liberty in New York Harbor is a symbol of freedom and democracy, standing 151 feet (46 meters) tall.",
+        "The Taj Mahal in Agra, India is a UNESCO World Heritage Site and one of the most famous and beautiful buildings in the world.",
+        "The Dead Sea, located between Israel and Jordan, is the lowest point on Earth at 430.5 meters (1,412 feet) below sea level.",
+        "The Grand Canyon in Arizona, USA is a natural wonder of the world, stretching 277 miles (446 kilometers) long and up to 18 miles (29 kilometers) wide.",
+        "The Colosseum in Rome, Italy is one of the most iconic ancient structures in the world, built in the 1st century AD.",
+        "The Pyramids of Giza in Egypt are the oldest and largest of the three pyramids in the Giza pyramid complex, built around 2560-2540 BC.",
+        "The Great Sphinx of Giza in Egypt is a colossal statue with the head of a human and the body of a lion, believed to have been built around 2500 BC.",
+        "The Leaning Tower of Pisa in Italy is a freestanding bell tower that leans at an angle of about 3.99 degrees, built between 1173 and 1372.",
+        "The Acropolis of Athens in Greece is an ancient citadel that contains some of the most famous ancient Greek buildings, including the Parthenon, built in the 5th century BC.",
+        "The Forbidden City in Beijing, China is a palace complex that was the former imperial palace and home to the Chinese emperors from 1420 to 1912.",
+        "The Machu Picchu in Peru is an Inca citadel set high in the Andes Mountains, built in the 15th century and later abandoned.",
+        "The Angkor Wat in Cambodia is the largest religious monument in the world, originally built as a Hindu temple in the early 12th century.",
+        "The Northern Lights, also known as the Aurora Borealis, are a natural light display in the sky caused by the collision of charged particles from the sun and the Earth's atmosphere.",
+        "The Great Barrier Reef in Australia is the largest living organism on Earth, visible from outer space."
+      ]
+
     const navigateToSummary = () => {
       nagivate("/pdfSummary");
     };
@@ -44,6 +72,11 @@ function HomePage (){
             setIsLoading(false);
         }
     };
+
+    function getRandomFact() {
+        const randomIndex = Math.floor(Math.random() * facts.length);
+        return facts[randomIndex];
+    }
 
     function extractText(event) {
         const file = event.target.files[0]
@@ -97,14 +130,23 @@ function HomePage (){
         >
             {isLoading ? (
                 <>
-                <Spinner size="xl" />
-                <Text as={"b"} fontSize={'3xl'} padding={10}> Hold ON! While we generate the Information for you!</Text>
+                <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" gap={8}>
+                    <Box>
+                        <Spinner size="xl" />
+                        <Text as="b" fontSize="3xl" p={10}>
+                        Hold ON! While we generate the Information for you!
+                        </Text>
+                    </Box>
+                    <Box>
+                        <Text as="b" fontSize="2xl">{getRandomFact()}</Text>
+                    </Box>
+            </Box>
                 </>
             ) : (
         <Box p={4} 
         >
             <Flex mb={4}>
-                <Stack direction={"column"} justifyContent={"center"} spacing={10}>
+                <Stack direction={"column"} justifyContent={"center"} spacing={15}>
                     <Text as={"b"} fontSize={'3xl'}> QuestAI - Your Buddy in Learning New topics using AI</Text>
                 <Stack direction={{ base: "column", md: "row" }} justifyContent={"center"} spacing={10}> 
                 <Box

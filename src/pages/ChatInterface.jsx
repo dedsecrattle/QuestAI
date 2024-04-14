@@ -35,7 +35,7 @@ function ChatInterface({ context }) {
       <Box flexGrow={1} overflowY="auto">
         {messages.map((message) => (
           <Flex key={message.id} justify={message.sender === 'user' ? 'flex-end' : 'flex-start'} mb={4}>
-            <Box bg={message.sender === 'user' ? 'blue.400' : 'white'} color={message.sender === 'user' ? 'white' : 'black'} p={4} borderRadius="md" shadow="md" maxWidth="70%"
+            <Box bg={message.sender === 'user' ? 'blue.400' : 'white'} color={message.sender === 'user' ? 'white' : 'black'} p={4} pl={6} borderRadius="md" shadow="md" maxWidth="70%"
              textAlign={message.sender === 'user' ? 'right' : 'left'}>
               <Markdown>{message.text}</Markdown>
             </Box>

@@ -25,7 +25,6 @@ function HomePage (){
     const nagivate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
     const [level, setlevel] = useState('Select the Level of Proficiency');
-
     const facts = [
         "The Earth is the only planet in our solar system with liquid water on its surface.",
         "The Mariana Trench is the deepest part of the world's oceans, reaching a maximum depth of approximately 10,994 meters (36,070 feet).",
@@ -53,13 +52,17 @@ function HomePage (){
         "The Northern Lights, also known as the Aurora Borealis, are a natural light display in the sky caused by the collision of charged particles from the sun and the Earth's atmosphere.",
         "The Great Barrier Reef in Australia is the largest living organism on Earth, visible from outer space."
       ]
-
+    const isGenerateButtonDisabled = level === 'Select the Level of Proficiency';
     const navigateToSummary = () => {
       nagivate("/pdfSummary");
     };
 
     const handleGenerate = async (e) => {
         e.preventDefault();
+        if (isGenerateButtonDisabled) {
+            alert('Please select a level of proficiency.');
+            return;
+        } 
         setIsLoading(true);
 
         try {
@@ -206,7 +209,7 @@ function HomePage (){
                                 </MenuItem>
                             </MenuList>
                         </Menu>
-                        <Button onClick={handleGenerate} size='lg'>Generate</Button>
+                        <Button onClick={handleGenerate} size='lg' isDisabled={isGenerateButtonDisabled}>Generate</Button>
                     </Stack>
                 </Box>
                 </Stack>

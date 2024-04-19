@@ -9,8 +9,7 @@ function GenMaterial() {
   const nagivate = useNavigate();
   const [showQuiz, setShowQuiz] = useState(false);
   const [generatedQuiz, setGeneratedQuiz] = useState(null);
-
-  const WarningMessage = `**Warning: Potential Harmful Content Detected**
+ const WarningMessage = `**Warning: Potential Harmful Content Detected**
 
   This system is designed to prevent the generation of harmful, unethical, or illegal content. We've detected that the content you are attempting to create may fall into one of these categories. The creation and distribution of harmful content is strictly prohibited. This includes (but is not limited to) content that:
   

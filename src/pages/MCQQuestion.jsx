@@ -10,7 +10,7 @@ const extractQuestionsAndAnswers = (quizContent) => {
     const explanations = [];
 
     // Iterate through the documents and extract the questions and answers
-    for(let i = 0; i <10; i++){
+    for(let i = 0; i <5; i++){
         // Extract the question
         const questionStart = quizContent.indexOf('<question>',index_tracker) + 10;
         const questionEnd = quizContent.indexOf('</question>',index_tracker);
@@ -64,7 +64,8 @@ const MCQQuestion = ({quizContent}) => {
         setSelectedAnswer(option);
         const correctAnswer = answers[currentQuestionIndex];
         setIsCorrect(option[0] === correctAnswer);
-        setExplanation(explanations[currentQuestionIndex]); // Explanation is the second item in the inner list
+        setExplanation(explanations[currentQuestionIndex]);
+        setExplanation(explanations[currentQuestionIndex]);
     };
 
     return (
@@ -81,7 +82,7 @@ const MCQQuestion = ({quizContent}) => {
                                 colorScheme={selectedAnswer === option ? (isCorrect ? 'green' : 'red') : 'gray'}
                                 onClick={() => handleAnswerSelect(option)}
                             >
-                                 {option}
+                                {option}
                             </Button>
                         ))}
                     </VStack>
